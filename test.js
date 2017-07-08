@@ -19,11 +19,11 @@ db.defaults({ block: {} })
 //   .write();
 
 var startHeight = 286441; // Auditing began on 2017/07/07
-var maxHeight = 287500;
+var maxHeight = 287550; // Some 'high' block height that we know exists
 var delay = 0;
 
 var blockHeight = startHeight;
-var loop = function() {
+var monitor = function() {
   if( blockHeight < maxHeight ) {
     rpcClient.getBlockHash(blockHeight, function(err, blockHash, resHeaders) {
       if (err) return console.log(err);
@@ -81,7 +81,7 @@ var loop = function() {
     console.log('Waiting for new block...')
     // break;
   }
-  setTimeout(loop, delay);
+  setTimeout(monitor, delay);
 }
 
-loop();
+monitor();

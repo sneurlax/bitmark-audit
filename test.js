@@ -24,7 +24,7 @@ var delay = 0;
 
 var blockHeight = startHeight;
 var monitor = function() {
-  if( blockHeight < maxHeight ) {
+  if( blockHeight <= maxHeight ) {
     rpcClient.getBlockHash(blockHeight, function(err, blockHash, resHeaders) {
       if (err) return console.log(err);
 
@@ -64,7 +64,7 @@ var monitor = function() {
     // if( blockHeight > 287500 )
     //   break;
   } else {
-    if( maxHeight != 287500 ) {
+    if( maxHeight != 287550 ) {
       delay = 3000;
     } else {
       if( delay == 0 ) {
@@ -74,11 +74,10 @@ var monitor = function() {
           delay = 0;
           return
         });
-      } else {
-        delay = 1;
+        delay = 100;
       }
     }
-    console.log('Waiting for new block...')
+    console.log('Waiting for new block.  Current height '+(blockHeight-1))
     // break;
   }
   setTimeout(monitor, delay);

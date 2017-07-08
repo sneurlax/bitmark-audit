@@ -1,11 +1,11 @@
-var jsonAuth = require('./jsonAuth.js');
+var rpcAuth = require('./rpcAuth.js');
 var bitcoin = require('./node_modules/bitcoin')
 
 var client = new bitcoin.Client({
   host: 'localhost',
   port: 9266,
-  user: jsonAuth.rpcuser,
-  pass: jsonAuth.rpcpassword,
+  user: rpcAuth.rpcuser,
+  pass: rpcAuth.rpcpassword,
   timeout: 30000
 });
 

@@ -4,7 +4,8 @@
   "description": "An auditing suite for the Bitmark blockchain and mempool",
   "main": "index.js",
   "dependencies": {
-    "bitcoin": "^3.0.1"
+    "bitcoin": "^3.0.1",
+    "lowdb": "^0.16.2"
   },
   "devDependencies": {},
   "scripts": {

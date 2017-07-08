@@ -1,0 +1,28 @@
+{
+  "name": "bitmark-audit",
+  "version": "1.0.0",
+  "description": "An auditing suite for the Bitmark blockchain and mempool",
+  "main": "index.js",
+  "dependencies": {
+    "bitcoin": "^3.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sneurlax/bitmark-audit.git"
+  },
+  "keywords": [
+    "bitmark",
+    "audit",
+    "blockchain"
+  ],
+  "author": "sneurlax",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sneurlax/bitmark-audit/issues"
+  },
+  "homepage": "https://github.com/sneurlax/bitmark-audit#readme"
+}

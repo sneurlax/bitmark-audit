@@ -29,13 +29,15 @@ rpcuser=Abscond
 rpcpassword=You_Will_Get_Robbed_If_You_Use_This
 ```
 
+Edit `rpcAuth.js` to reflect the values set in `bitmark.conf`.
+
 ### Usage
 
 Two tools are included in this repository: **monitor** and **audit**.
 
-`monitor.js` should be kept running in order to detect orphans, forks, wipeouts, and so on.  If it is not running during such an event it will have no way of detecting it in retrospect.
+`monitor.js` logs all valid blocks as they are broadcast.  It will detect if multiple valid blocks are broadcast for a given block height, *ie.* it will detect orphaned blocks, forks, wipeouts, etc.  It should run constantly, as if it is not running during such an event it will have no way of detecting it in retrospect.
 
-`audit.js` scans the database built by `monitor.js` and audits it for any anomalies like those mentioned above.
+`audit.js` scans the database built by `monitor.js` (`bitmark.json`) and audits it for any anomalies like those mentioned above (*eg.* multiple valid blocks for any block height.)
 
 ### Notes
 

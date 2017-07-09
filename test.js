@@ -64,20 +64,20 @@ var monitor = function() {
     // if( blockHeight > 287500 )
     //   break;
   } else {
+    if( delay == 0 || delay == 3000 ) {
+      delay = 100; // flag to indicate that we are querying the max block height
+      currentHeight = rpcClient.getBlockCount( function(err, result, resHeaders) {
+        if( err ) return console.log(err);
+        if( maxHeight < result ) {
+          maxHeight = result;
+          delay = 0;
+        }
+        return
+      });
+    }
+
     if( maxHeight != 287550 ) {
       delay = 3000;
-    } else {
-      if( delay == 0 || delay == 3000 ) {
-        currentHeight = rpcClient.getBlockCount( function(err, result, resHeaders) {
-          if( err ) return console.log(err);
-          if( maxHeight < result ) {
-            maxHeight = result;
-            delay = 0;
-          }
-          return
-        });
-        delay = 100; // flag to indicate that we are querying the max block height
-      }
     }
     console.log('Waiting for new block. Current height '+(blockHeight-1));
     // break;

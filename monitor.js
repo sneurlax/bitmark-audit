@@ -60,24 +60,23 @@ var monitor = function() {
     });
 
     blockHeight++;
-
-    // if( blockHeight > 287500 )
-    //   break;
   } else {
-    if( maxHeight != 287550 ) {
-      delay = 3000;
-    } else {
-      if( delay == 0 ) {
-        currentHeight = rpcClient.getBlockCount( function(err, result, resHeaders) {
-          if (err) return console.log(err);
+    if( delay == 0 || delay == 3000 ) {
+      delay = 100; // flag to indicate that we are querying the max block height
+      currentHeight = rpcClient.getBlockCount( function(err, result, resHeaders) {
+        if( err ) return console.log(err);
+        if( maxHeight < result ) {
           maxHeight = result;
           delay = 0;
-          return
-        });
-        delay = 100;
-      }
+        }
+        return
+      });
     }
-    console.log('Waiting for new block.  Current height '+(blockHeight-1))
+
+    if( maxHeight != 287550 ) {
+      delay = 3000;
+    }
+    console.log('Waiting for new block. Current height '+(blockHeight-1));
     // break;
   }
   setTimeout(monitor, delay);

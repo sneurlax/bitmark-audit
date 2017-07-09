@@ -1,6 +1,6 @@
 {
   "name": "bitmark-audit",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "An auditing suite for the Bitmark blockchain and mempool",
   "main": "index.js",
   "dependencies": {

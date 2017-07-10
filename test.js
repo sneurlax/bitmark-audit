@@ -17,5 +17,5 @@ db.defaults({ block: {} })
 var blocks = db.get('block').value();
 
 for( height in blocks ) {
-  console.log(height);
+  console.log('At height '+height+', '+Object.keys(blocks[height]).length+' blocks exist.');
 }

@@ -14,12 +14,8 @@ var db = low('bitmark.json', { storage: require('lowdb/lib/storages/file-async')
 db.defaults({ block: {} })
   .write();
 
-// db
-//   .set('block', {height: 'height2', hash: 'hash2', info: {}})
-//   .write();
-
 var startHeight = 286441; // Auditing began on 2017/07/07
-var maxHeight = 287550; // Some 'high' block height that we know exists
+var maxHeight = 289590; // Some 'high' block height that we know exists
 var delay = 0;
 
 var blockHeight = startHeight;

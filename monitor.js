@@ -46,7 +46,6 @@ var monitor = function() {
           console.log('Orphan detected at height '+blockInfo['height']);
 
           var newBlockInfo = db.get(blockInfo['height']).value();
-          // oldBlockInfo[blockInfo['hash']] = blockObj;
           newBlockInfo[blockInfo['hash']] = blockInfo;
 
           db

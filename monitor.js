@@ -30,8 +30,8 @@ var monitor = function() {
         blockObj = {}
         blockObj[blockInfo['hash']] = blockInfo;
 
-        var heightFound = db.has(blockInfo['height']).value()
-        var hashFound = db.has(blockInfo['height']+'.'+blockInfo['hash']).value()
+        var heightFound = db.has('block.'+blockInfo['height']).value()
+        var hashFound = db.has('block.'+blockInfo['height']+'.'+blockInfo['hash']).value()
 
         if( !heightFound && !hashFound ) {
           db

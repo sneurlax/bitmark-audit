@@ -31,6 +31,8 @@ rpcpassword=You_Will_Get_Robbed_If_You_Use_This
 
 Edit `rpcAuth.js` to reflect the values set in `bitmark.conf`.
 
+Finally, `npm install` the required packages from `package.json`
+
 ### Usage
 
 Two tools are included in this repository: **monitor** and **audit**.

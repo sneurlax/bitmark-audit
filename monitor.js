@@ -35,7 +35,7 @@ var monitor = function() {
 
         if( !heightFound && !hashFound ) {
           db
-            .set(blockInfo['height'], blockObj)
+            .set('block.'+blockInfo['height'], blockObj)
             .write();
           console.log('Recorded block '+blockInfo['hash']+' at height '+blockInfo['height']);
         } else if( heightFound && !hashFound ) {
@@ -45,7 +45,7 @@ var monitor = function() {
           newBlockObj[blockInfo['hash']] = blockInfo;
 
           db
-            .set(blockInfo['height'], newBlockObj, blockObj)
+            .set('block.'+blockInfo['height'], newBlockObj, blockObj)
             .write();
           console.log('Recorded new block '+blockInfo['hash']+' at height '+blockInfo['height']);
         } else {

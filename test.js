@@ -14,8 +14,8 @@ var db = low('bitmark.json', { storage: require('lowdb/lib/storages/file-async')
 db.defaults({ block: {} })
   .write();
 
-console.log(
-  db.get('block')
-    .size()
-    .value()
-  );
+var blocks = db.get('block').value();
+
+for( height in blocks ) {
+  console.log(height);
+}

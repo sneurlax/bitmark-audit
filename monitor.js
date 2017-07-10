@@ -47,7 +47,7 @@ var monitor = function() {
 
           var newBlockInfo = db.get(blockInfo['height']).value();
           // oldBlockInfo[blockInfo['hash']] = blockObj;
-          newBlockInfo[blockInfo['hash']+'asdf'] = blockInfo;
+          newBlockInfo[blockInfo['hash']] = blockInfo;
 
           db
             .set(blockInfo['height'], newBlockInfo, blockObj)

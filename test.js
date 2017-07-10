@@ -19,7 +19,11 @@ var blocks = db.get('block').value();
 for( height in blocks ) {
 
   if( Object.keys(blocks[height]).length > 1 ) {
-    console.log('Height '+height+': FAILED CHECK ('+Object.keys(blocks[height]).length+' blocks found)');
+    if( Object.keys(blocks[height]).length == 2 ) {
+      console.log('Height '+height+': ORPHAN DETECTED');
+    } else {
+      console.log('Height '+height+': ORPHANS DETECTED');
+    }
   } else {
     if( db.has('block.'+(height-1)).value() ) { // only false for first recorded block
       if( blocks[height][Object.keys(blocks[height])[Object.keys(blocks[height]).length-1]]['previousblockhash'] == Object.keys(db.get('block.'+(height-1)).value())[Object.keys(blocks[height-1]).length-1] ) { // current block's previousblockhash equals the previous block's hash

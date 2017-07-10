@@ -45,11 +45,11 @@ var monitor = function() {
         } else if( heightFound && !hashFound ) {
           console.log('Orphan detected at height '+blockInfo['height']);
 
-          var newBlockInfo = db.get(blockInfo['height']).value();
-          newBlockInfo[blockInfo['hash']] = blockInfo;
+          var newBlockObj = db.get(blockInfo['height']).value();
+          newBlockObj[blockInfo['hash']] = blockInfo;
 
           db
-            .set(blockInfo['height'], newBlockInfo, blockObj)
+            .set(blockInfo['height'], newBlockObj, blockObj)
             .write();
           console.log('Recorded new block '+blockInfo['hash']+' at height '+blockInfo['height']);
         } else {

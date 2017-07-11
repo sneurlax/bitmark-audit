@@ -58,4 +58,4 @@ typings/
 .env
 
 bitmark.json
-orphan.json
+audit.json

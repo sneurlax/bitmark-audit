@@ -2,9 +2,9 @@
 An auditing suite for the Bitmark blockchain and mempool
 
 ### Setup
-The Bitmark configuration file must be set to allow JSON-RPC connections.  By defualt, Bitmark (or bitmarkd) will look for a file name `bitmark.conf` in the bitmark data directory, but both the data directory and the configuration file path may be changed using the -datadir and -conf command-line arguments.
+The Bitmark configuration file must be set to allow JSON-RPC connections.  By default, Bitmark (or bitmarkd) will look for a file name `bitmark.conf` in the bitmark data directory, but both the data directory and the configuration file path may be changed using the -datadir and -conf command-line arguments.
 
-| Operating System | Default bitmark datadir                    | Typical path to configuration file                                |
+| Operating System | Default bitmark datadir                    | Typical path to configuration file                               |
 |------------------|--------------------------------------------|------------------------------------------------------------------|
 | Windows          | %APPDATA%\Bitmark\                         | C:\Users\username\AppData\Roaming\Bitmark\bitmark.conf           |
 | Linux            | $HOME/.bitmark/                            | /home/username/.bitmark/bitmark.conf                             |
@@ -31,7 +31,7 @@ rpcpassword=You_Will_Get_Robbed_If_You_Use_This
 
 Edit `rpcAuth.js` to reflect the values set in `bitmark.conf`.
 
-Finally, `npm install` the required packages from `package.json`
+Finally, run `npm install` in the ~/bitmark-audit directory to install the required packages from `package.json`
 
 ### Usage
 

@@ -33,7 +33,9 @@ Edit `rpcAuth.js` to reflect the values set in `bitmark.conf`.
 
 
 If not already done, install Node.JS
+
         For Debian / Ubuntu
+
    $ sudo apt-get install npm
    $ sudo apt-get install nodejs-legacy
 

@@ -72,15 +72,12 @@ var monitor = function() {
         return
       });
     }
-    if( maxHeight != 287550 ) {
+    if( maxHeight != 289590 ) {
       delay = 3000;
     }
     if (notificationCount++ == 0) console.log('Waiting for new block. Current height '+(blockHeight-1))
     else {
-      for(i=0, progressInDots =''; i<notificationCount; i++) progressInDots += '.'
-      process.stdout.clearLine();
-      process.stdout.cursorTo(0);
-      process.stdout.write(progressInDots);
+      process.stdout.write('.');
     }
     // break;
   }

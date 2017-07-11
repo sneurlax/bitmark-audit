@@ -10,26 +10,37 @@ var rpcClient = new bitcoin.Client({
 });
 
 var low = require('lowdb');
-var db = low('bitmark.json', { storage: require('lowdb/lib/storages/file-async') });
-db.defaults({ block: {} })
+var chain_db = low('bitmark.json', { storage: require('lowdb/lib/storages/file-async') });
+chain_db.defaults({ block: {} })
   .write();
 
-var blocks = db.get('block').value();
+var audit_db = low('audit.json', { storage: require('lowdb/lib/storages/file-async') });
+audit_db.defaults({ audit: {} })
+  .write();
 
-for( height in blocks ) {
+var chain = chain_db.get('block').value();
 
-  if( Object.keys(blocks[height]).length > 1 ) {
-    if( Object.keys(blocks[height]).length == 2 ) {
+for( height in chain ) {
+  var blocks = Object.keys(chain[height]).length;
+
+  if( blocks > 1 ) {
+    for( i=0; i < blocks-1; i++ ) { // write all but the latest blocks (the latest block will be the 'most' valid one.)
+      audit_db
+        .set('audit.'+height, chain[height][Object.keys(chain[height])[i]])
+        .write();
+    }
+
+    if( blocks == 2 ) {
       console.log('Height '+height+': ORPHAN DETECTED');
     } else {
       console.log('Height '+height+': ORPHANS DETECTED');
     }
   } else {
-    if( db.has('block.'+(height-1)).value() ) { // only false for first recorded block
-      if( blocks[height][Object.keys(blocks[height])[Object.keys(blocks[height]).length-1]]['previousblockhash'] == Object.keys(db.get('block.'+(height-1)).value())[Object.keys(blocks[height-1]).length-1] ) { // current block's previousblockhash equals the previous block's hash
+    if( chain_db.has('block.'+(height-1)).value() ) { // only false for first recorded block
+      if( chain[height][Object.keys(chain[height])[blocks-1]]['previousblockhash'] == Object.keys(chain_db.get('block.'+(height-1)).value())[Object.keys(chain[height-1]).length-1] ) { // current block's previousblockhash equals the previous block's hash
         // console.log('Height '+height+': OK');
       } else {
-        console.log('Height '+height+': FAILED CHECK (expected previousblockhash '+(blocks[height][Object.keys(blocks[height])[0]]['previousblockhash']).substr(0,6)+'..., found '(Object.keys(db.get('block.'+(height-1)).value())[0]).substr(0,6)+'...)');
+        console.log('Height '+height+': FAILED CHECK (expected previousblockhash '+(chain[height][Object.keys(chain[height])[0]]['previousblockhash']).substr(0,6)+'..., found '(Object.keys(chain_db.get('block.'+(height-1)).value())[0]).substr(0,6)+'...)');
       }
     } else { // first recorded block; don't/can't check previous block hash
       // console.log('Height '+height+': OK');

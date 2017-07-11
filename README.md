@@ -2,9 +2,11 @@
 An auditing suite for the Bitmark blockchain and mempool
 
 ### Setup
-The Bitmark configuration file must be set to allow JSON-RPC connections.  By defualt, Bitmark (or bitmarkd) will look for a file name `bitmark.conf` in the bitmark data directory, but both the data directory and the configuration file path may be changed using the -datadir and -conf command-line arguments.
 
-| Operating System | Default bitmark datadir                    | Typical path to configuration file                                |
+##### Bitmark Configuration
+The Bitmark configuration file must be set to allow JSON-RPC connections.  By default, Bitmark (or bitmarkd) will look for a file name `bitmark.conf` in the bitmark data directory, but both the data directory and the configuration file path may be changed using the -datadir and -conf command-line arguments.
+
+| Operating System | Default bitmark datadir                    | Typical path to configuration file                               |
 |------------------|--------------------------------------------|------------------------------------------------------------------|
 | Windows          | %APPDATA%\Bitmark\                         | C:\Users\username\AppData\Roaming\Bitmark\bitmark.conf           |
 | Linux            | $HOME/.bitmark/                            | /home/username/.bitmark/bitmark.conf                             |
@@ -31,7 +33,19 @@ rpcpassword=You_Will_Get_Robbed_If_You_Use_This
 
 Edit `rpcAuth.js` to reflect the values set in `bitmark.conf`.
 
-Finally, `npm install` the required packages from `package.json`
+##### Node.js
+If not already done, install Node.JS
+
+For Debian / Ubuntu
+```bash
+sudo apt-get install npm
+sudo apt-get install nodejs-legacy
+```
+
+Finally, run `npm install` in the ~/bitmark-audit directory to install the required packages from `package.json`
+```bash
+   ~/bitmark-audit $ npm install
+```
 
 ### Usage
 
@@ -44,3 +58,8 @@ Two tools are included in this repository: **monitor** and **audit**.
 ### Notes
 
 Monitoring began on 2017/07/07 at block height 286441.  `bitmark.json.bootstrap` is a log file created up to height 287571.  I (sneurlax) will work on uploading a canonical version of `bitmark.json` somewhere accessible "soon."
+
+To ignore your username/password changes to `rpcAuth.js`, use the following command (instead of adding it to `.gitignore`:)
+```bash
+git update-index --assume-unchanged rpcAuth.js
+```

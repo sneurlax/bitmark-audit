@@ -16,8 +16,8 @@ db.defaults({ block: {} })
 
 var startHeight = 286441; // Auditing began on 2017/07/07
 var maxHeight = 289590; // Some 'high' block height that we know exists
+var waiting = false; // Use to check if we've already printed 'Waiting...' notification
 var delay = 0;
-var notificationCount = 0; // Use to check if we've already printed notification plus store times since printed.
 
 var blockHeight = startHeight;
 var monitor = function() {
@@ -34,15 +34,15 @@ var monitor = function() {
         var heightFound = db.has('block.'+blockInfo['height']).value()
         var hashFound = db.has('block.'+blockInfo['height']+'.'+blockInfo['hash']).value()
 
-        notificationCount && console.log() // Make sure we get a new line after the stdout formating.
+        waiting && console.log() // Make sure we get a new line after the stdout formating.
         if( !heightFound && !hashFound ) {
-          notificationCount = 0;
+          waiting = false;
           db
             .set('block.'+blockInfo['height'], blockObj)
             .write();
           console.log('Recorded block '+blockInfo['hash']+' at height '+blockInfo['height']);
         } else if( heightFound && !hashFound ) {
-          notificationCount = 0;
+          waiting = false;
           console.log('Orphan detected at height '+blockInfo['height']);
 
           var newBlockObj = db.get(blockInfo['height']).value();
@@ -53,7 +53,7 @@ var monitor = function() {
             .write();
           console.log('Recorded new block '+blockInfo['hash']+' at height '+blockInfo['height']);
         } else {
-          notificationCount = 0;
+          waiting = false;
           console.log('Found block '+blockInfo['hash']+' at height '+blockInfo['height']);
         }
       });
@@ -75,8 +75,10 @@ var monitor = function() {
     if( maxHeight != 289590 ) {
       delay = 3000;
     }
-    if (notificationCount++ == 0) console.log('Waiting for new block. Current height '+(blockHeight-1))
-    else {
+    if( !waiting ) {
+      console.log('Waiting for new block. Current height '+(blockHeight-1))
+      waiting = true;
+    } else {
       process.stdout.write('.');
     }
     // break;

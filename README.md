@@ -63,3 +63,7 @@ To ignore your username/password changes to `rpcAuth.js`, use the following comm
 ```bash
 git update-index --assume-unchanged rpcAuth.js
 ```
+
+#### Contributing
+
+PR the latest stable pre-release code at `#dev`.

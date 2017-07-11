@@ -31,7 +31,14 @@ rpcpassword=You_Will_Get_Robbed_If_You_Use_This
 
 Edit `rpcAuth.js` to reflect the values set in `bitmark.conf`.
 
+
+If not already done, install Node.JS
+        For Debian / Ubuntu
+   $ sudo apt-get install npm
+   $ sudo apt-get install nodejs-legacy
+
 Finally, run `npm install` in the ~/bitmark-audit directory to install the required packages from `package.json`
+   ~/bitmark-audit $ npm install
 
 ### Usage
 

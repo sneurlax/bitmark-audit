@@ -58,3 +58,8 @@ Two tools are included in this repository: **monitor** and **audit**.
 ### Notes
 
 Monitoring began on 2017/07/07 at block height 286441.  `bitmark.json.bootstrap` is a log file created up to height 287571.  I (sneurlax) will work on uploading a canonical version of `bitmark.json` somewhere accessible "soon."
+
+To ignore your username/password changes to `rpcAuth.js`, use the following command (instead of adding it to `.gitignore`:)
+```bash
+git update-index --assume-unchanged rpcAuth.js
+```

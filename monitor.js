@@ -46,12 +46,16 @@ var monitor = function() {
           console.log('Orphan detected at height '+blockInfo['height']);
 
           var newBlockObj = db.get(blockInfo['height']).value();
-          newBlockObj[blockInfo['hash']] = blockInfo;
+          if( newBlockObj ) {
+            newBlockObj[blockInfo['hash']] = blockInfo;
 
-          db
-            .set('block.'+blockInfo['height'], newBlockObj, blockObj)
-            .write();
-          console.log('Recorded new block '+blockInfo['hash']+' at height '+blockInfo['height']);
+            db
+              .set('block.'+blockInfo['height'], newBlockObj, blockObj)
+              .write();
+            console.log('Recorded new block '+blockInfo['hash']+' at height '+blockInfo['height']);
+          } else {
+            console.log('Almost recorded new block '+blockInfo['hash']+' at height '+blockInfo['height']);
+          }
         } else {
           waiting = false;
           console.log('Found block '+blockInfo['hash']+' at height '+blockInfo['height']);

@@ -61,7 +61,7 @@ var monitor = function() {
 
     blockHeight++;
   } else {
-    if( delay == 0 || delay == 3000 ) {
+    if( delay == 0 || delay == 333 ) {
       delay = 100; // flag to indicate that we are querying the max block height
       currentHeight = rpcClient.getBlockCount( function(err, result, resHeaders) {
         if( err ) return console.log(err);
@@ -73,7 +73,7 @@ var monitor = function() {
       });
     }
     if( maxHeight != 289590 ) {
-      delay = 3000;
+      delay = 333;
     }
     if( !waiting ) {
       console.log('Waiting for new block. Current height '+(blockHeight-1))

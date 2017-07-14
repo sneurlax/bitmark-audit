@@ -40,7 +40,7 @@ for( height in chain ) {
       if( chain[height][Object.keys(chain[height])[blocks-1]]['previousblockhash'] == Object.keys(chain_db.get('block.'+(height-1)).value())[Object.keys(chain[height-1]).length-1] ) { // current block's previousblockhash equals the previous block's hash
         // console.log('Height '+height+': OK');
       } else {
-        console.log('Height '+height+': FAILED CHECK (expected previousblockhash '+(chain[height][Object.keys(chain[height])[0]]['previousblockhash']).substr(0,6)+'..., found '(Object.keys(chain_db.get('block.'+(height-1)).value())[0]).substr(0,6)+'...)');
+        console.log('Height '+height+': FAILED CHECK (expected previousblockhash '+String(chain[height][Object.keys(chain[height])[0]]['previousblockhash']).substr(0,6)+'..., found '+String(Object.keys(chain_db.get('block.'+(height-1)).value())[0]).substr(0,6)+'...)');
       }
     } else { // first recorded block; don't/can't check previous block hash
       // console.log('Height '+height+': OK');
